@@ -1,20 +1,17 @@
-var restify = require('restify');
-var fetch = require("fetch").fetch;
-var server = restify.createServer();
+const restify = require('restify');
+const fetch = require("node-fetch");
+const server = restify.createServer();
+const service  = require('./recipe-service');
 
-function get_recipes(req, res, next) {
-    var recipes;
-    var fetchUrl = require("fetch").fetchUrl;
+server.get('/recipes/:ingredients',(req, res, next)=>{
 
-    fetchUrl('http://www.recipepuppy.com/api/?i=' + req.params.ingredients, function(error, meta, body){
-        recipes = JSON.parse(body.toString())
+    service.Recipe.getAll(req.params.ingredients).then(recipes=>{
         res.send(recipes);
         next();
-    });
-}
+    }).catch(error => { throw error})
 
-
-server.get('/recipes/:ingredients', get_recipes);
+    
+});
 
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
