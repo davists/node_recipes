@@ -1,4 +1,4 @@
-# node-recipes - delivery much challenge
+# node-food-recipes
 
 You'll need to run docker-compose
 ```
