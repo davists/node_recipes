@@ -24,7 +24,7 @@ class ServiceRecipe {
     
     static async getGiphy(recipeTitle) {
         const encodedRecipeTitle = encodeURI(recipeTitle)
-        const url = 'http://api.giphy.com/v1/gifs/search?api_key=Vfn1KgVVJvJVZFbSDyqQUZoopHBDzVOD&lang=en&limit=1&q=' + encodedRecipeTitle
+        const url = 'http://api.giphy.com/v1/gifs/search?api_key=YOUR_KEY&lang=en&limit=1&q=' + encodedRecipeTitle
         const giphy = await fetch(url).then(r => r.json()).catch(error => { throw error})
         return giphy['data'][0]['images']['preview_gif']['url'];
     }
